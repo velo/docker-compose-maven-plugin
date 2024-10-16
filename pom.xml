@@ -3,9 +3,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dkanejs.maven.plugins</groupId>
+    <groupId>com.marvinformatics</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>4.0.0</version>
+    <version>5.0.0</version>
 
     <packaging>maven-plugin</packaging>
 
