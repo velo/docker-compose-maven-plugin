@@ -146,6 +146,36 @@ abstract class AbstractDockerComposeMojo extends AbstractMojo {
     @Parameter(defaultValue = "false", property = "dockerCompose.ignorePullFailures")
     boolean ignorePullFailures;
 
+    /**
+     * Specify profiles to enable
+     */
+    @Parameter(property = "dockerCompose.profiles")
+    private List<String> profiles;
+
+    /**
+     * Control max parallelism, -1 for unlimited
+     */
+    @Parameter(property = "dockerCompose.parallel")
+    private Integer parallel;
+
+    /**
+     * Set type of progress output (auto, tty, plain, json, quiet)
+     */
+    @Parameter(property = "dockerCompose.progress")
+    private String progress;
+
+    /**
+     * Specify an alternate working directory
+     */
+    @Parameter(property = "dockerCompose.projectDirectory")
+    private String projectDirectory;
+
+    /**
+     * Execute command in dry run mode
+     */
+    @Parameter(defaultValue = "false", property = "dockerCompose.dryRun")
+    private boolean dryRun;
+
     void execute(List<String> args) throws MojoExecutionException {
 
         ProcessBuilder pb = buildProcess(args);
@@ -219,6 +249,31 @@ abstract class AbstractDockerComposeMojo extends AbstractMojo {
             cmd.add("-p");
             cmd.add(projectName);
         }
+
+        if (projectDirectory != null) {
+            cmd.add("--project-directory");
+            cmd.add(projectDirectory);
+        }
+
+        if (profiles != null && !profiles.isEmpty()) {
+            profiles.forEach(profile -> {
+                cmd.add("--profile");
+                cmd.add(profile);
+            });
+        }
+
+        if (parallel != null) {
+            cmd.add("--parallel");
+            cmd.add(parallel.toString());
+        }
+
+        if (progress != null) {
+            cmd.add("--progress");
+            cmd.add(progress);
+        }
+
+        if (dryRun)
+            cmd.add("--dry-run");
 
         cmd.addAll(args);
 

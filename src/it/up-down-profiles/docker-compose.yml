@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  base-service:
+    image: busybox
+    container_name: mpdc-it-up-down-profiles-base
+    command: sleep 600
+
+  dev-service:
+    image: busybox
+    container_name: mpdc-it-up-down-profiles-dev
+    command: sleep 600
+    profiles:
+      - dev
+
+  debug-service:
+    image: busybox
+    container_name: mpdc-it-up-down-profiles-debug
+    command: sleep 600
+    profiles:
+      - debug
+
+  prod-service:
+    image: busybox
+    container_name: mpdc-it-up-down-profiles-prod
+    command: sleep 600
+    profiles:
+      - prod
