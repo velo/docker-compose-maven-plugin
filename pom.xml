@@ -5,7 +5,7 @@
 
     <groupId>com.marvinformatics</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>6.0-SNAPSHOT</version>
+    <version>6.0</version>
 
     <packaging>maven-plugin</packaging>
 
@@ -41,15 +41,19 @@
     <scm>
         <connection>scm:git:ssh://git@github.com:dkanejs/docker-compose-maven-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:dkanejs/docker-compose-maven-plugin.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>6.0</tag>
         <url>https://github.com/dkanejs/docker-compose-maven-plugin.git</url>
     </scm>
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>central</id>
+            <url>https://central.sonatype.com/</url>
         </snapshotRepository>
+        <repository>
+            <id>central</id>
+            <url>https://central.sonatype.com/</url>
+        </repository>
     </distributionManagement>
 
     <properties>
@@ -103,14 +107,13 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
                 </configuration>
             </plugin>
         </plugins>
